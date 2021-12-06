@@ -6,17 +6,43 @@ import TextField from '@mui/material/TextField'
 import Select from '@mui/material/Select'
 import Paper from '@mui/material/Paper'
 import { makeStyles } from '@mui/styles'
+import { useEffect, useState } from 'react'
 
 export default function Home() {
+  const [collections, setCollections] = useState(null)
+
   const useStyles = makeStyles(() => ({
     root: { height: '500px', width: '1000px' },
     paper: { height: '100%', width: '100%' },
-    container1: { height: '100%', background: 'blue' },
-    container2: { height: '100%', width: '50%', background: 'orange' },
-    container3: { height: '100%', width: '50%', background: 'purple' },
+    container1: { height: '100%' },
+    container2: { height: '100%', width: '50%' },
+    container3: { height: '100%', width: '50%' },
+    container4: {
+      height: '100%',
+      width: '100%',
+      padding: '20px',
+    },
+    container5: { height: '100%', width: '100%' },
+    input1: { margin: '20px' },
+    input2: { width: '50%', margin: '20px' },
+    description: { margin: '20px' },
   }))
 
   const classes = useStyles()
+
+  useEffect(() => {
+    fetchData()
+  }, [])
+
+  async function fetchData() {
+    try {
+      const res = await fetch('http://localhost:5000/options')
+      const data = await res.json()
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -30,8 +56,45 @@ export default function Home() {
         alignItems="center">
         <Paper className={classes.paper}>
           <Grid container className={classes.container1}>
-            <Grid className={classes.container2}></Grid>
-            <Grid className={classes.container3}></Grid>
+            <Grid className={classes.container2}>
+              <Grid
+                container
+                className={classes.container4}
+                direction="column"
+                justifyContent="center">
+                <TextField
+                  label="Helper text"
+                  defaultValue="Enter Name"
+                  className={classes.input1}
+                  label="Name of NFT"></TextField>
+                <TextField
+                  label="Helper text"
+                  defaultValue="Enter Description"
+                  className={classes.description}
+                  multiline
+                  rows={6}
+                  label="NFT Description"></TextField>
+              </Grid>
+            </Grid>
+            <Grid className={classes.container3}>
+              <Grid
+                container
+                className={classes.container5}
+                direction="column"
+                justifyContent="center"
+                alignItems="center">
+                <TextField
+                  id="outlined-select-currency"
+                  select
+                  label="Artist"
+                  helperText="Please select your artist"></TextField>
+                <TextField
+                  label="Helper text"
+                  defaultValue="Enter artist name"
+                  className={classes.input2}
+                  label="Artist"></TextField>
+              </Grid>
+            </Grid>
           </Grid>
         </Paper>
       </Grid>
