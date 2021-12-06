@@ -13,7 +13,7 @@ export default function Home() {
     paper: { height: '100%', width: '100%' },
     container1: { height: '100%', background: 'blue' },
     container2: { height: '100%', width: '50%', background: 'orange' },
-    container2: { height: '100%', width: '50%', background: 'purple' },
+    container3: { height: '100%', width: '50%', background: 'purple' },
   }))
 
   const classes = useStyles()
